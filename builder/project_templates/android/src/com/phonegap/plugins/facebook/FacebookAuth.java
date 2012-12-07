@@ -135,7 +135,7 @@ public class FacebookAuth extends Plugin {
 
 			};
 		};
-		this.ctx.runOnUiThread(runnable);
+		this.cordova.getActivity().runOnUiThread(runnable);
 
     }
 

@@ -10,7 +10,8 @@ package com.phonegap.plugins.childBrowser;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.cordova.api.CordovaInterface;
+import org.apache.cordova.api.Plugin;
+import org.apache.cordova.api.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,22 +23,25 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.text.InputType;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-
-import com.phonegap.api.PhonegapActivity;
-import com.phonegap.api.Plugin;
-import com.phonegap.api.PluginResult;
+import android.widget.RelativeLayout;
 
 public class ChildBrowser extends Plugin {
 
@@ -120,7 +124,7 @@ public class ChildBrowser extends Plugin {
         try {
             Intent intent = null;
             if (usePhoneGap) {
-                intent = new Intent().setClass(this.ctx.getContext(), org.apache.cordova.DroidGap.class);
+                intent = new Intent().setClass(this.ctx.getActivity(), org.apache.cordova.DroidGap.class);
                 intent.setData(Uri.parse(url)); // This line will be removed in future.
                 intent.putExtra("url", url);
 
@@ -135,7 +139,7 @@ public class ChildBrowser extends Plugin {
                 intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
             }
-            this.ctx.startActivity(intent);
+            this.ctx.getActivity().startActivity(intent);
             return "";
         } catch (android.content.ActivityNotFoundException e) {
             Log.d(LOG_TAG, "ChildBrowser: Error loading url "+url+":"+ e.toString());
@@ -176,13 +180,14 @@ public class ChildBrowser extends Plugin {
      * @param url to load
      */
     private void navigate(String url) {
-        InputMethodManager imm = (InputMethodManager)this.ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager)this.ctx.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(edittext.getWindowToken(), 0);
 
-        if (!url.startsWith("http")) {
+        if (!url.startsWith("http") && !url.startsWith("file:")) {
             this.webview.loadUrl("http://" + url);
+        } else {
+            this.webview.loadUrl(url);
         }
-        this.webview.loadUrl(url);
         this.webview.requestFocus();
     }
 
@@ -210,9 +215,24 @@ public class ChildBrowser extends Plugin {
 
         // Create dialog in new thread
         Runnable runnable = new Runnable() {
-            public void run() {
-                dialog = new Dialog(ctx.getContext(), android.R.style.Theme_Translucent_NoTitleBar);
+            /**
+             * Convert our DIP units to Pixels
+             *
+             * @return int
+             */
+            private int dpToPixels(int dipValue) {
+                int value = (int) TypedValue.applyDimension( TypedValue.COMPLEX_UNIT_DIP,
+                                                            (float) dipValue,
+                                                            ctx.getActivity().getResources().getDisplayMetrics()
+                );
 
+                return value;
+            }
+
+            public void run() {
+                // Let's create the main dialog
+                dialog = new Dialog(ctx.getActivity(), android.R.style.Theme_NoTitleBar);
+                dialog.getWindow().getAttributes().windowAnimations = android.R.style.Animation_Dialog;
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setCancelable(true);
                 dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -228,47 +248,72 @@ public class ChildBrowser extends Plugin {
                         }
                 });
 
-                LinearLayout.LayoutParams backParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-                LinearLayout.LayoutParams forwardParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-                LinearLayout.LayoutParams editParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT, 1.0f);
-                LinearLayout.LayoutParams closeParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-                LinearLayout.LayoutParams wvParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-
-                LinearLayout main = new LinearLayout(ctx.getContext());
+                // Main container layout
+                LinearLayout main = new LinearLayout(ctx.getActivity());
                 main.setOrientation(LinearLayout.VERTICAL);
 
-                LinearLayout toolbar = new LinearLayout(ctx.getContext());
-                toolbar.setOrientation(LinearLayout.HORIZONTAL);
+                // Toolbar layout
+                RelativeLayout toolbar = new RelativeLayout(ctx.getActivity());
+                toolbar.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, this.dpToPixels(44)));
+                toolbar.setPadding(this.dpToPixels(2), this.dpToPixels(2), this.dpToPixels(2), this.dpToPixels(2));
+                toolbar.setHorizontalGravity(Gravity.LEFT);
+                toolbar.setVerticalGravity(Gravity.TOP);
 
-                ImageButton back = new ImageButton(ctx.getContext());
-                back.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        goBack();
-                    }
-                });
-                back.setId(1);
+                // Action Button Container layout
+                RelativeLayout actionButtonContainer = new RelativeLayout(ctx.getActivity());
+                actionButtonContainer.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+                actionButtonContainer.setHorizontalGravity(Gravity.LEFT);
+                actionButtonContainer.setVerticalGravity(Gravity.CENTER_VERTICAL);
+                actionButtonContainer.setId(1);
+
+                // Back button
+                ImageButton back = new ImageButton(ctx.getActivity());
+                RelativeLayout.LayoutParams backLayoutParams = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT);
+                backLayoutParams.addRule(RelativeLayout.ALIGN_LEFT);
+                back.setLayoutParams(backLayoutParams);
+                back.setContentDescription("Back Button");
+                back.setId(2);
                 try {
                     back.setImageBitmap(loadDrawable("www/childbrowser/icon_arrow_left.png"));
                 } catch (IOException e) {
                     Log.e(LOG_TAG, e.getMessage(), e);
                 }
-                back.setLayoutParams(backParams);
-
-                ImageButton forward = new ImageButton(ctx.getContext());
-                forward.setOnClickListener(new View.OnClickListener() {
+                back.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        goForward();
+                        goBack();
                     }
                 });
-                forward.setId(2);
+
+                // Forward button
+                ImageButton forward = new ImageButton(ctx.getActivity());
+                RelativeLayout.LayoutParams forwardLayoutParams = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT);
+                forwardLayoutParams.addRule(RelativeLayout.RIGHT_OF, 2);
+                forward.setLayoutParams(forwardLayoutParams);
+                forward.setContentDescription("Forward Button");
+                forward.setId(3);
                 try {
                     forward.setImageBitmap(loadDrawable("www/childbrowser/icon_arrow_right.png"));
                 } catch (IOException e) {
                     Log.e(LOG_TAG, e.getMessage(), e);
                 }
-                forward.setLayoutParams(forwardParams);
+                forward.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        goForward();
+                    }
+                });
 
-                edittext = new EditText(ctx.getContext());
+                // Edit Text Box
+                edittext = new EditText(ctx.getActivity());
+                RelativeLayout.LayoutParams textLayoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+                textLayoutParams.addRule(RelativeLayout.RIGHT_OF, 1);
+                textLayoutParams.addRule(RelativeLayout.LEFT_OF, 5);
+                edittext.setLayoutParams(textLayoutParams);
+                edittext.setId(4);
+                edittext.setSingleLine(true);
+                edittext.setText(url);
+                edittext.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+                edittext.setImeOptions(EditorInfo.IME_ACTION_GO);
+                edittext.setInputType(InputType.TYPE_NULL); // Will not except input... Makes the text NON-EDITABLE
                 edittext.setOnKeyListener(new View.OnKeyListener() {
                     public boolean onKey(View v, int keyCode, KeyEvent event) {
                         // If the event is a key-down event on the "enter" button
@@ -279,46 +324,60 @@ public class ChildBrowser extends Plugin {
                         return false;
                     }
                 });
-                edittext.setId(3);
-                edittext.setSingleLine(true);
-                edittext.setText(url);
-                edittext.setLayoutParams(editParams);
 
-                ImageButton close = new ImageButton((Context) ctx);
-                close.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        closeDialog();
-                    }
-                });
-                close.setId(4);
+                // Close button
+                ImageButton close = new ImageButton(ctx.getActivity());
+                RelativeLayout.LayoutParams closeLayoutParams = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT);
+                closeLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                close.setLayoutParams(closeLayoutParams);
+                forward.setContentDescription("Close Button");
+                close.setId(5);
                 try {
                     close.setImageBitmap(loadDrawable("www/childbrowser/icon_close.png"));
                 } catch (IOException e) {
                     Log.e(LOG_TAG, e.getMessage(), e);
                 }
-                close.setLayoutParams(closeParams);
+                close.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        closeDialog();
+                    }
+                });
 
-                webview = new WebView(ctx.getContext());
-                webview.getSettings().setJavaScriptEnabled(true);
-                webview.getSettings().setBuiltInZoomControls(true);
+                // WebView
+                webview = new WebView(ctx.getActivity());
+                webview.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+                webview.setWebChromeClient(new WebChromeClient());
                 WebViewClient client = new ChildBrowserClient(edittext);
                 webview.setWebViewClient(client);
+                WebSettings settings = webview.getSettings();
+                settings.setJavaScriptEnabled(true);
+                settings.setJavaScriptCanOpenWindowsAutomatically(true);
+                settings.setBuiltInZoomControls(true);
+                settings.setPluginsEnabled(true);
+                settings.setDomStorageEnabled(true);
                 webview.loadUrl(url);
-                webview.setId(5);
-                webview.setInitialScale(0);
-                webview.setLayoutParams(wvParams);
+                webview.setId(6);
+                webview.getSettings().setLoadWithOverviewMode(true);
+                webview.getSettings().setUseWideViewPort(true);
                 webview.requestFocus();
                 webview.requestFocusFromTouch();
 
+                // Add the back and forward buttons to our action button container layout
+                actionButtonContainer.addView(back);
+                actionButtonContainer.addView(forward);
 
-                toolbar.addView(back);
-                toolbar.addView(forward);
+                // Add the views to our toolbar
+                toolbar.addView(actionButtonContainer);
                 toolbar.addView(edittext);
                 toolbar.addView(close);
 
+                // Don't add the toolbar if its been disabled
                 if (getShowLocationBar()) {
+                    // Add our toolbar to our main view/layout
                     main.addView(toolbar);
                 }
+
+                // Add our webview to our main view/layout
                 main.addView(webview);
 
                 WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -331,12 +390,12 @@ public class ChildBrowser extends Plugin {
                 dialog.getWindow().setAttributes(lp);
             }
 
-            private Bitmap loadDrawable(String filename) throws java.io.IOException {
-                InputStream input = ctx.getAssets().open(filename);
-                return BitmapFactory.decodeStream(input);
-            }
+          private Bitmap loadDrawable(String filename) throws java.io.IOException {
+              InputStream input = ctx.getActivity().getAssets().open(filename);
+              return BitmapFactory.decodeStream(input);
+          }
         };
-        this.ctx.runOnUiThread(runnable);
+        this.ctx.getActivity().runOnUiThread(runnable);
         return "";
     }
 
@@ -379,7 +438,7 @@ public class ChildBrowser extends Plugin {
         public void onPageStarted(WebView view, String url,  Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
             String newloc;
-            if (url.startsWith("http:") || url.startsWith("https:")) {
+            if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("file:")) {
                 newloc = url;
             } else {
                 newloc = "http://" + url;

@@ -64,7 +64,7 @@ public class GoogleAnalyticsTracker extends Plugin {
 	}
 
 	private void start(String accountId) {
-		tracker.start(accountId, DISPATCH_INTERVAL, this.ctx.getApplicationContext());
+		tracker.start(accountId, DISPATCH_INTERVAL, this.cordova.getActivity().getApplicationContext());
 	}
 
 	private void trackPageView(String key) {
