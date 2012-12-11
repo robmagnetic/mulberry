@@ -3,13 +3,7 @@
 //  Copyright 2012, Randy McMillan
 
 #import "ChildBrowserCommand.h"
-
-#ifdef CORDOVA_FRAMEWORK
 #import <Cordova/CDVViewController.h>
-#else
-#import "Cordova/CDVViewController.h"
-#endif
-
 
 @implementation ChildBrowserCommand
 

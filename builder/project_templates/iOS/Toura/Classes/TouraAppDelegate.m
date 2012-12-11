@@ -11,13 +11,8 @@
 
 #import "MainViewController.h"
 
-#ifdef CORDOVA_FRAMEWORK
 #import <Cordova/CDVPlugin.h>
 #import <Cordova/CDVURLProtocol.h>
-#else
-#import "CDVPlugin.h"
-#import "CDVURLProtocol.h"
-#endif
 
 #import "PushNotification.h"
 

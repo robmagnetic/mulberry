@@ -7,12 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#ifdef CORDOVA_FRAMEWORK
 #import <Cordova/CDVViewController.h>
-#else
-#import "CDVViewController.h"
-#endif
 
 @interface TouraAppDelegate : NSObject < UIApplicationDelegate > {
 }

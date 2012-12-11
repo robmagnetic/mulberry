@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18E7725B167738C6006F282A /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E77255167738AE006F282A /* libCordova.a */; };
+		18FD49CE16762F4B0016F1F7 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 18FD49CD16762F4B0016F1F7 /* VERSION */; };
 		645122FB154880FD00025F11 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 645122FA154880FD00025F11 /* Foundation.framework */; };
 		645122FD154880FD00025F11 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 645122FC154880FD00025F11 /* UIKit.framework */; };
 		645122FF154880FD00025F11 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 645122FE154880FD00025F11 /* CoreGraphics.framework */; };
@@ -22,7 +24,6 @@
 		64512313154880FD00025F11 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64512312154880FD00025F11 /* CoreMedia.framework */; };
 		64512319154880FD00025F11 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64512317154880FD00025F11 /* InfoPlist.strings */; };
 		6451231B154880FD00025F11 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6451231A154880FD00025F11 /* main.m */; };
-		6451231E154880FD00025F11 /* Cordova.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6451231D154880FD00025F11 /* Cordova.framework */; };
 		64512323154880FD00025F11 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64512321154880FD00025F11 /* Localizable.strings */; };
 		64512332154880FD00025F11 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 64512331154880FD00025F11 /* icon.png */; };
 		64512334154880FD00025F11 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64512333154880FD00025F11 /* icon@2x.png */; };
@@ -32,7 +33,6 @@
 		6451233F154880FD00025F11 /* Cordova.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6451233E154880FD00025F11 /* Cordova.plist */; };
 		64512346154880FE00025F11 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64512345154880FE00025F11 /* MainViewController.m */; };
 		64512348154880FE00025F11 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64512347154880FE00025F11 /* MainViewController.xib */; };
-		6451234C154880FE00025F11 /* verify.sh in Resources */ = {isa = PBXBuildFile; fileRef = 6451234B154880FE00025F11 /* verify.sh */; };
 		6451235D1548817000025F11 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 6451235C1548817000025F11 /* www */; };
 		645123DF1548834300025F11 /* ChildBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 645123D61548834300025F11 /* ChildBrowser.bundle */; };
 		645123E01548834300025F11 /* ChildBrowserCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 645123D81548834300025F11 /* ChildBrowserCommand.m */; };
@@ -48,7 +48,33 @@
 		649111AB15644CF600357F2E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 649111A715644CF600357F2E /* README.md */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		18E77254167738AE006F282A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18FD49BA16762D6A0016F1F7 /* CordovaLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 68A32D7114102E1C006B237C;
+			remoteInfo = CordovaLib;
+		};
+		18E77256167738AE006F282A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18FD49BA16762D6A0016F1F7 /* CordovaLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 686357A9141002F100DF4CF2;
+			remoteInfo = CordovaLibTests;
+		};
+		18E77258167738AE006F282A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18FD49BA16762D6A0016F1F7 /* CordovaLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 303A4068152124BB00182201;
+			remoteInfo = CordovaLibApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		18FD49BA16762D6A0016F1F7 /* CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CordovaLib.xcodeproj; sourceTree = CORDOVALIB; };
+		18FD49CD16762F4B0016F1F7 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = CORDOVALIB; };
 		645122F6154880FD00025F11 /* Toura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toura.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		645122FA154880FD00025F11 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		645122FC154880FD00025F11 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -67,7 +93,6 @@
 		64512318154880FD00025F11 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6451231A154880FD00025F11 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6451231C154880FD00025F11 /* Toura-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Toura-Prefix.pch"; sourceTree = "<group>"; };
-		6451231D154880FD00025F11 /* Cordova.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cordova.framework; path = /Users/Shared/Cordova/Frameworks/Cordova.framework; sourceTree = "<absolute>"; };
 		64512322154880FD00025F11 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		64512331154880FD00025F11 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Resources/icons/icon.png; sourceTree = "<group>"; };
 		64512333154880FD00025F11 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "Resources/icons/icon@2x.png"; sourceTree = "<group>"; };
@@ -79,7 +104,6 @@
 		64512345154880FE00025F11 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Classes/MainViewController.m; sourceTree = "<group>"; };
 		64512347154880FE00025F11 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainViewController.xib; path = Classes/MainViewController.xib; sourceTree = "<group>"; };
 		6451234A154880FE00025F11 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = Plugins/README; sourceTree = "<group>"; };
-		6451234B154880FE00025F11 /* verify.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = verify.sh; sourceTree = "<group>"; };
 		6451235C1548817000025F11 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
 		645123D61548834300025F11 /* ChildBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ChildBrowser.bundle; path = Plugins/ChildBrowser.bundle; sourceTree = "<group>"; };
 		645123D71548834300025F11 /* ChildBrowserCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChildBrowserCommand.h; path = Plugins/ChildBrowserCommand.h; sourceTree = "<group>"; };
@@ -106,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E7725B167738C6006F282A /* libCordova.a in Frameworks */,
 				6491114D1564058A00357F2E /* libsqlite3.0.dylib in Frameworks */,
 				645122FB154880FD00025F11 /* Foundation.framework in Frameworks */,
 				645122FD154880FD00025F11 /* UIKit.framework in Frameworks */,
@@ -120,7 +145,6 @@
 				6451230F154880FD00025F11 /* SystemConfiguration.framework in Frameworks */,
 				64512311154880FD00025F11 /* MobileCoreServices.framework in Frameworks */,
 				64512313154880FD00025F11 /* CoreMedia.framework in Frameworks */,
-				6451231E154880FD00025F11 /* Cordova.framework in Frameworks */,
 				649111921564496100357F2E /* CFNetwork.framework in Frameworks */,
 				649111AA15644CF600357F2E /* libGoogleAnalytics.a in Frameworks */,
 			);
@@ -136,9 +160,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18E7724F167738AE006F282A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18E77255167738AE006F282A /* libCordova.a */,
+				18E77257167738AE006F282A /* CordovaLibTests.octest */,
+				18E77259167738AE006F282A /* CordovaLibApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		645122E8154880FD00025F11 = {
 			isa = PBXGroup;
 			children = (
+				18FD49CD16762F4B0016F1F7 /* VERSION */,
+				18FD49BA16762D6A0016F1F7 /* CordovaLib.xcodeproj */,
 				6491114C1564058A00357F2E /* libsqlite3.0.dylib */,
 				6451235C1548817000025F11 /* www */,
 				64512314154880FD00025F11 /* Toura */,
@@ -179,7 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				649111911564496100357F2E /* CFNetwork.framework */,
-				6451231D154880FD00025F11 /* Cordova.framework */,
 				6451231F154880FD00025F11 /* Resources */,
 				64512340154880FD00025F11 /* Classes */,
 				64512349154880FE00025F11 /* Plugins */,
@@ -198,7 +233,6 @@
 				6451231C154880FD00025F11 /* Toura-Prefix.pch */,
 				6451233E154880FD00025F11 /* Cordova.plist */,
 				64512347154880FE00025F11 /* MainViewController.xib */,
-				6451234B154880FE00025F11 /* verify.sh */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -310,7 +344,6 @@
 				645122F1154880FD00025F11 /* Resources */,
 				645122F2154880FD00025F11 /* Sources */,
 				645122F3154880FD00025F11 /* Frameworks */,
-				645122F4154880FD00025F11 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -343,12 +376,42 @@
 			mainGroup = 645122E8154880FD00025F11;
 			productRefGroup = 645122F7154880FD00025F11 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 18E7724F167738AE006F282A /* Products */;
+					ProjectRef = 18FD49BA16762D6A0016F1F7 /* CordovaLib.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				645122F5154880FD00025F11 /* Toura */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		18E77255167738AE006F282A /* libCordova.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCordova.a;
+			remoteRef = 18E77254167738AE006F282A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		18E77257167738AE006F282A /* CordovaLibTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CordovaLibTests.octest;
+			remoteRef = 18E77256167738AE006F282A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		18E77259167738AE006F282A /* CordovaLibApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = CordovaLibApp.app;
+			remoteRef = 18E77258167738AE006F282A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		645122F1154880FD00025F11 /* Resources */ = {
@@ -364,32 +427,16 @@
 				6451233D154880FD00025F11 /* Capture.bundle in Resources */,
 				6451233F154880FD00025F11 /* Cordova.plist in Resources */,
 				64512348154880FE00025F11 /* MainViewController.xib in Resources */,
-				6451234C154880FE00025F11 /* verify.sh in Resources */,
 				6451235D1548817000025F11 /* www in Resources */,
 				645123DF1548834300025F11 /* ChildBrowser.bundle in Resources */,
 				645123E21548834300025F11 /* ChildBrowserViewController.xib in Resources */,
 				645123E81548835F00025F11 /* UrbanAirship.plist in Resources */,
 				649111AB15644CF600357F2E /* README.md in Resources */,
+				18FD49CE16762F4B0016F1F7 /* VERSION in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		645122F4154880FD00025F11 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "\n\t\t\t\t\t\t\t\tchmod 755 \"$PROJECT_DIR/$PROJECT_NAME/verify.sh\"\n\t\t\t\t\t\t\t\t\"$PROJECT_DIR/$PROJECT_NAME/verify.sh\"\n\t\t\t\t\t";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		645122EF154880FD00025F11 /* Sources */ = {
@@ -489,16 +536,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = armv7;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = /Users/Shared/Cordova/Frameworks;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Toura/Toura-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1,",
-					"CORDOVA_FRAMEWORK=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1,";
 				GCC_THUMB_SUPPORT = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
+					"\"$(OBJROOT)/UninstalledProducts/include\"",
+					"\"$(BUILT_PRODUCTS_DIR)\"",
+				);
 				INFOPLIST_FILE = "Toura/Toura-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
@@ -515,6 +565,10 @@
 					CoreMedia,
 					"-weak_library",
 					/usr/lib/libSystem.B.dylib,
+					"-Obj-C",
+					"-all_load",
+					"-weak_framework",
+					CoreFoundation,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -527,16 +581,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = armv7;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = /Users/Shared/Cordova/Frameworks;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Toura/Toura-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"NDEBUG=1,",
-					"CORDOVA_FRAMEWORK=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "NDEBUG=1,";
 				GCC_THUMB_SUPPORT = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
+					"\"$(OBJROOT)/UninstalledProducts/include\"",
+					"\"$(BUILT_PRODUCTS_DIR)\"",
+				);
 				INFOPLIST_FILE = "Toura/Toura-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
@@ -553,6 +610,10 @@
 					CoreMedia,
 					"-weak_library",
 					/usr/lib/libSystem.B.dylib,
+					"-Obj-C",
+					"-all_load",
+					"-weak_framework",
+					CoreFoundation,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
