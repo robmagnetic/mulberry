@@ -17,6 +17,21 @@
        specific language governing permissions and limitations
        under the License.
 -->
+<cordova>
+    <!--
+    access elements control the Android whitelist.
+    Domains are assumed blocked unless set otherwise
+     -->
+
+    <access origin="http://127.0.0.1*"/> <!-- allow local pages -->
+
+    <!-- <access origin="https://example.com" /> allow any secure requests to example.com -->
+    <!-- <access origin="https://example.com" subdomains="true" /> such as above, but including subdomains, such as www -->
+    <!-- <access origin=".*"/> Allow all domains, suggested development use only -->
+
+    <log level="DEBUG"/>
+    <preference name="classicRender" value="true" />
+    <preference name="useBrowserHistory" value="false" />
 <plugins>
     <plugin name="App" value="org.apache.cordova.App"/>
     <plugin name="Geolocation" value="org.apache.cordova.GeoBroker"/>
@@ -38,5 +53,7 @@
     <plugin name="FacebookAuth" value="com.phonegap.plugins.facebook.FacebookAuth"/>
     <plugin name="ChildBrowser" value="com.phonegap.plugins.childBrowser.ChildBrowser"/>
     <plugin name="GoogleAnalyticsTracker" value="com.phonegap.plugins.analytics.GoogleAnalyticsTracker" />
-    <plugin name="VideoPlayer" value="com.phonegap.plugins.video.VideoPlayer"/>    
+    <plugin name="VideoPlayer" value="com.phonegap.plugins.video.VideoPlayer"/>        
 </plugins>
+</cordova>
+

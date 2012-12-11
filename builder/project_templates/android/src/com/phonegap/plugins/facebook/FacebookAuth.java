@@ -131,7 +131,7 @@ public class FacebookAuth extends Plugin {
 			public void run() {
 				fba.mFb = new Facebook(appid);
 				fba.mFb.setPlugin(fba);
-		        fba.mFb.authorize((Activity) fba.ctx, new String[] { "publish_stream", "offline_access" }, new AuthorizeListener(fba));
+				fba.mFb.authorize((Activity) fba.cordova, new String[] { "publish_stream", "offline_access" }, new AuthorizeListener(fba));
 
 			};
 		};
