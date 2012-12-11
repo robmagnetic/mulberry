@@ -165,11 +165,11 @@ mulberry.app.PhoneGap.browser = function(pg, device){
           /**
            * Load ChildBrowser
            */
-          cordova.addConstructor(function() {
-              cordova.addPlugin("childBrowser", new ChildBrowser());
-          });
+          // cordova.addConstructor(function() {
+          //     cordova.addPlugin("childBrowser", new ChildBrowser());
+          // });
 
-          ChildBrowser.install();
+          // ChildBrowser.install();
 
         }
       };
@@ -180,6 +180,9 @@ mulberry.app.PhoneGap.browser = function(pg, device){
 
   return {
     url : function(url) {
+
+      
+
       if (pg) {
         if (os === 'android') {
           if(url.search(/app.toura.com/) > -1) {
@@ -188,7 +191,12 @@ mulberry.app.PhoneGap.browser = function(pg, device){
             cordova.exec(null, null, 'ChildBrowser', 'showWebPage', [url, false]);
           }
         } else {
+          if( ! window.plugins.childBrowser ) {
+            ChildBrowser.install();
+          }
+          // window.plugins.childBrowser = new ChildBrowser();
           window.plugins.childBrowser.showWebPage(url);
+
         }
         return;
       }
