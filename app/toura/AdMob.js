@@ -77,7 +77,7 @@ dojo.declare('toura.AdMob', null, {
     var amConfig = mulberry.app.Config.get('app');
 
     if ( amConfig.ad_mob ) {
-      toura.AdMob = new toura.AdMob(amConfig.ad_mob.publisher_id);  
+      toura.AdMob = new toura.AdMob(amConfig.ad_mob.publisher_id);
     } else {
       return;
     }
