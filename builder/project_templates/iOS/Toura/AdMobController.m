@@ -18,6 +18,7 @@
 
 - (CDVPlugin*)initWithWebView:(UIWebView*)theWebView 
 {
+    [theWebView setFrame:CGRectMake(0, 0, theWebView.frame.size.width, theWebView.frame.size.height - 50)];
     self = (AdMobController*) [super initWithWebView:theWebView];
     return [super initWithWebView:theWebView];
 }
@@ -43,8 +44,7 @@
     self.adBanner.adUnitID = self.siteId;
     self.adBanner.delegate = self;
     [self.adBanner setRootViewController:self.viewController];
-    [self.webView.superview addSubview:self.adBanner];
-   
+    [self.webView.superview insertSubview:self.adBanner belowSubview:self.webView];
 }
 
 - (void) loadBanner:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
@@ -65,16 +65,16 @@
     if(!self.adBanner)
         [self createBanner:arguments withDict:options];
     
-    [UIView animateWithDuration:1.0 animations:^{
-        self.adBanner.frame = [self createRectangle:options]; 
-    }];    
+//    [UIView animateWithDuration:1.0 animations:^{
+        self.adBanner.frame = [self createRectangle:options];
+//    }];    
 }
 
 - (void) deleteBanner:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
 {
     [self.adBanner removeFromSuperview];
     self.adBanner = nil;
-} 
+}
 
 
 - (void) setLocation:(GADRequest**) request withDict: (NSMutableDictionary*) options
@@ -90,29 +90,34 @@
     }
 }
 
-- (CGRect) createRectangle:(NSMutableDictionary *) options 
+- (CGRect) createRectangle:(NSMutableDictionary *) options
 {
-    CGFloat positionX = GAD_SIZE_320x50.width;
+    CGFloat positionX = 0;
     CGFloat positionY = self.webView.superview.frame.size.height - (GAD_SIZE_320x50.height);
     CGFloat width = GAD_SIZE_320x50.width;
     CGFloat height = GAD_SIZE_320x50.height;
+    
+    if (UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation]))
+    {
+        positionY = self.webView.superview.frame.size.width - (GAD_SIZE_320x50.height);
+    }
  
-    if([options objectForKey:@"positionX"])
-    {
-        positionX=[[options objectForKey:@"positionX"] floatValue];
-    }
-    if([options objectForKey:@"positionY"])
-    {
-        positionY=[[options objectForKey:@"positionY"] floatValue];
-    }
-    if([options objectForKey:@"width"])
-    {
-        width=[[options objectForKey:@"width"] floatValue];
-    }    
-    if([options objectForKey:@"height"])
-    {
-        height=[[options objectForKey:@"height"] floatValue];
-    }
+//    if([options objectForKey:@"positionX"])
+//    {
+//        positionX=[[options objectForKey:@"positionX"] floatValue];
+//    }
+//    if([options objectForKey:@"positionY"])
+//    {
+//        positionY=[[options objectForKey:@"positionY"] floatValue];
+//    }
+//    if([options objectForKey:@"width"])
+//    {
+//        width=[[options objectForKey:@"width"] floatValue];
+//    }    
+//    if([options objectForKey:@"height"])
+//    {
+//        height=[[options objectForKey:@"height"] floatValue];
+//    }
     return CGRectMake(positionX, positionY, width, height);
 }
 
@@ -147,7 +152,7 @@ didFailToReceiveAdWithError:(GADRequestError *)error
     NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
     // NSString* jsString = [NSString stringWithFormat:@"window.plugins.AdMob.didFailToReceiveAdWithErrorCallback(%@);", 
     //                     [error localizedFailureReason]];
-	//[self.webView stringByEvaluatingJavaScriptFromString:jsString];
+    //[self.webView stringByEvaluatingJavaScriptFromString:jsString];
 
 }
 
@@ -165,21 +170,21 @@ didFailToReceiveAdWithError:(GADRequestError *)error
 // after that adViewWillLeaveApplication: is called.
 - (void)adViewWillPresentScreen:(GADBannerView *)adView
 {
-	//[self.webView stringByEvaluatingJavaScriptFromString:@"window.plugins.AdMob.adViewWillPresentScreenCallback();"];
+    //[self.webView stringByEvaluatingJavaScriptFromString:@"window.plugins.AdMob.adViewWillPresentScreenCallback();"];
 
 }
 
 // Sent just before dismissing a full screen view.
 - (void)adViewWillDismissScreen:(GADBannerView *)adView
 {
-	//[self.webView stringByEvaluatingJavaScriptFromString:@"window.plugins.AdMob.adViewWillDismissScreenAdCallback();"];
+    //[self.webView stringByEvaluatingJavaScriptFromString:@"window.plugins.AdMob.adViewWillDismissScreenAdCallback();"];
 }
 
 // Sent just after dismissing a full screen view.  Use this opportunity to
 // restart anything you may have stopped as part of adViewWillPresentScreen:.
 - (void)adViewDidDismissScreen:(GADBannerView *)adView
 {
-	//[self.webView stringByEvaluatingJavaScriptFromString:@"window.plugins.AdMob.adViewDidDismissScreenCallback();"];
+    //[self.webView stringByEvaluatingJavaScriptFromString:@"window.plugins.AdMob.adViewDidDismissScreenCallback();"];
 }
 
 // Sent just before the application will background or terminate because the
@@ -188,18 +193,18 @@ didFailToReceiveAdWithError:(GADRequestError *)error
 // applicationDidEnterBackground:, will be called immediately before this.
 - (void)adViewWillLeaveApplication:(GADBannerView *)adView
 {
-	//[self.webView stringByEvaluatingJavaScriptFromString:@"window.plugins.AdMob.adViewWillLeaveApplicationCallback();"];
+    //[self.webView stringByEvaluatingJavaScriptFromString:@"window.plugins.AdMob.adViewWillLeaveApplicationCallback();"];
 
 }
 
 - (void) dealloc
 {
     if (self.adBanner)
-	{
+    {
         [self.adBanner removeFromSuperview];
         self.adBanner = nil;
-	}
-	
+    }
+    
     self.siteId = nil;
     [super dealloc];
 }

@@ -42,18 +42,20 @@ dojo.declare('toura.AdMob', null, {
   loadBanner : function (id, deviceType, orientation) {
 
     window.plugins.adMob.createBanner(id, deviceType);
-    
+
     switch(window.orientation) {
+      //Portrait
       case 0:
       case 180:
-        window.plugins.adMob.moveBanner(id, deviceType, 0, window.innerHeight - 50); // these values need to be dynamic based on device?
+        window.plugins.adMob.moveBanner(id, deviceType, 0, window.innerHeight); // these values need to be dynamic based on device?
         break;
+      //Landscape
       case -90:
       case 90:
-        window.plugins.adMob.moveBanner(id, deviceType, window.innerWidth / 2, window.innerHeight - 50); // these values need to be dynamic based on device?
+        window.plugins.adMob.moveBanner(id, deviceType, window.innerWidth / 2, window.innerHeight); // these values need to be dynamic based on device?
         break;
       default:
-        window.plugins.adMob.moveBanner(id, mulberry.Device.type, window.orientation - 50);
+        window.plugins.adMob.moveBanner(id, mulberry.Device.type, 0, window.innerHeight);
         break;
     }
 
@@ -72,9 +74,13 @@ dojo.declare('toura.AdMob', null, {
 
 (function(){
   dojo.subscribe('/app/ready', function() {
-    var gaConfig = mulberry.app.Config.get('app');
-    if (gaConfig.ad_mob.publisher_id) {
-      toura.AdMob = new toura.AdMob(gaConfig.ad_mob.publisher_id);
+    var amConfig = mulberry.app.Config.get('app');
+
+    if ( amConfig.ad_mob ) {
+      toura.AdMob = new toura.AdMob(amConfig.ad_mob.publisher_id);  
+    } else {
+      return;
     }
+
   });
 }());
