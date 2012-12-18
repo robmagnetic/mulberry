@@ -19,6 +19,7 @@
 - (CDVPlugin*)initWithWebView:(UIWebView*)theWebView 
 {
     [theWebView setFrame:CGRectMake(0, 0, theWebView.frame.size.width, theWebView.frame.size.height - 50)];
+    [theWebView.superview setBackgroundColor:[UIColor blackColor]];
     self = (AdMobController*) [super initWithWebView:theWebView];
     return [super initWithWebView:theWebView];
 }
@@ -100,6 +101,7 @@
     if (UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation]))
     {
         positionY = self.webView.superview.frame.size.width - (GAD_SIZE_320x50.height);
+        positionX = self.webView.superview.frame.size.width / 4;
     }
  
 //    if([options objectForKey:@"positionX"])
