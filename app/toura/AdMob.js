@@ -30,9 +30,23 @@ dojo.declare('toura.AdMob', null, {
    *
    * Calls the phonegap plugin to create, load, and then move the banner into place.
    */
-  loadBanner : function (id, deviceType) {
+  loadBanner : function (id, deviceType, orientation) {
+    switch(window.orientation) {
+      case 0:
+      case 180:
+        window.plugins.adMob.moveBanner(id, deviceType, 0, window.innerHeight - 50); // these values need to be dynamic based on device?
+        break;
+      case -90:
+      case 90:
+        window.plugins.adMob.moveBanner(id, deviceType, window.innerWidth / 2, window.innerHeight - 50); // these values need to be dynamic based on device?
+        break;
+      default:
+        window.plugins.adMob.moveBanner(id, mulberry.Device.type, window.orientation - 50)
+        break;
+    }
+
     window.plugins.adMob.createBanner(id, deviceType);
-    window.plugins.adMob.moveBanner(id, deviceType, 0, 430); // these values need to be dynamic based on device?
+
   },
 
   /**
@@ -41,8 +55,16 @@ dojo.declare('toura.AdMob', null, {
    * Deletes banner ad in native code
    */
   destroy : function () {
+    console.log('destroy');
     window.plugins.adMob.deleteBanner();
   }
 });
 
-
+(function(){
+  dojo.subscribe('/app/ready', function() {
+    var gaConfig = mulberry.app.Config.get('app');
+    if (gaConfig.ad_mob.publisher_id) {
+      toura.AdMob = new toura.AdMob(gaConfig.ad_mob.publisher_id);
+    }
+  });
+}());
