@@ -4,6 +4,7 @@ dojo.provide('toura.AdMob');
  *
  */
 
+
 dojo.declare('toura.AdMob', null, {
 
   /**
@@ -15,6 +16,14 @@ dojo.declare('toura.AdMob', null, {
   constructor : function (id) {
     //can do pub/sub type stuff in here if needed
     //need to listen for orientation change
+
+    this.loadBanner(id, mulberry.Device.type, window.orientation);
+
+    window.addEventListener("orientationchange", dojo.hitch(this, function() {
+      this.destroy();
+      this.loadBanner(id, mulberry.Device.type, window.orientation);
+    }, false));
+
   },
 
   /**
@@ -31,6 +40,9 @@ dojo.declare('toura.AdMob', null, {
    * Calls the phonegap plugin to create, load, and then move the banner into place.
    */
   loadBanner : function (id, deviceType, orientation) {
+
+    window.plugins.adMob.createBanner(id, deviceType);
+    
     switch(window.orientation) {
       case 0:
       case 180:
@@ -41,11 +53,9 @@ dojo.declare('toura.AdMob', null, {
         window.plugins.adMob.moveBanner(id, deviceType, window.innerWidth / 2, window.innerHeight - 50); // these values need to be dynamic based on device?
         break;
       default:
-        window.plugins.adMob.moveBanner(id, mulberry.Device.type, window.orientation - 50)
+        window.plugins.adMob.moveBanner(id, mulberry.Device.type, window.orientation - 50);
         break;
     }
-
-    window.plugins.adMob.createBanner(id, deviceType);
 
   },
 
