@@ -62,6 +62,8 @@
 		<string>GoogleAnalyticsPlugin</string>
 		<key>Device</key>
 		<string>CDVDevice</string>
+		<key>AdMob</key>
+		<string>AdMobController</string>
 	</dict>
 </dict>
 </plist>
