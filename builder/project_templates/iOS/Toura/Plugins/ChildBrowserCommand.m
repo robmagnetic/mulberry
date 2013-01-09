@@ -22,7 +22,7 @@
     NSArray* supportedOrientations = [strOrientations componentsSeparatedByString:@","];
 */
     CDVViewController* cont = (CDVViewController*)[ super viewController ];
-//    childBrowser.supportedOrientations = cont.supportedOrientations;
+    childBrowser.supportedOrientations = cont.supportedOrientations;
     [ cont presentModalViewController:childBrowser animated:YES ];
     
     NSString *url = (NSString*) [arguments objectAtIndex:0];

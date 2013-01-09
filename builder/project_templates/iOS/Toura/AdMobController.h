@@ -8,7 +8,11 @@
 #import <UIKit/UIKit.h>
 #import "GADBannerViewDelegate.h"
 #import <Foundation/Foundation.h>
+#ifdef PHONEGAP_FRAMEWORK
 #import <Cordova/CDVPlugin.h>
+#else
+#import "Cordova/CDVPlugin.h"
+#endif
 
 @class GADRequest;
 

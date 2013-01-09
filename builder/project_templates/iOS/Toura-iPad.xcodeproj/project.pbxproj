@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1838D6A6169DB8B90038C78B /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1838D6A4169DB8AD0038C78B /* libCordova.a */; };
+		18E772D71677429F006F282A /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E772D61677429F006F282A /* libCordova.a */; };
+		18E772D9167742CD006F282A /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 18E772D8167742CD006F282A /* VERSION */; };
 		6496B9EE156A943A004D68F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6496B9ED156A943A004D68F5 /* Foundation.framework */; };
 		6496B9F0156A943A004D68F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6496B9EF156A943A004D68F5 /* UIKit.framework */; };
 		6496B9F2156A943A004D68F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6496B9F1156A943A004D68F5 /* CoreGraphics.framework */; };
@@ -51,18 +52,10 @@
 		834F107215D04B60004DDB15 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 834F106615D04B60004DDB15 /* libGoogleAdMobAds.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		1838D6A3169DB8AD0038C78B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18E772C216774224006F282A /* CordovaLib.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 68A32D7114102E1C006B237C;
-			remoteInfo = CordovaLib;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		18E772C216774224006F282A /* CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CordovaLib.xcodeproj; path = "../../../../Cordova-2.1/CordovaLib/CordovaLib.xcodeproj"; sourceTree = "<group>"; };
+		18E772C216774224006F282A /* CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CordovaLib.xcodeproj; sourceTree = CORDOVALIB; };
+		18E772D61677429F006F282A /* libCordova.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libCordova.a; path = "../../../../CordovaLib/build/Release-iphoneos/libCordova.a"; sourceTree = "<group>"; };
+		18E772D8167742CD006F282A /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = CORDOVALIB; };
 		6496B9E9156A943A004D68F5 /* Toura-iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Toura-iPad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6496B9ED156A943A004D68F5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6496B9EF156A943A004D68F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -144,7 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1838D6A6169DB8B90038C78B /* libCordova.a in Frameworks */,
+				18E772D71677429F006F282A /* libCordova.a in Frameworks */,
 				834F105315D04918004DDB15 /* MessageUI.framework in Frameworks */,
 				6496BA7A156A98A9004D68F5 /* libsqlite3.0.dylib in Frameworks */,
 				6496B9EE156A943A004D68F5 /* Foundation.framework in Frameworks */,
@@ -176,17 +169,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1838D6A0169DB8AD0038C78B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1838D6A4169DB8AD0038C78B /* libCordova.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		6496B9DB156A943A004D68F5 = {
 			isa = PBXGroup;
 			children = (
+				18E772D8167742CD006F282A /* VERSION */,
+				18E772D61677429F006F282A /* libCordova.a */,
 				18E772C216774224006F282A /* CordovaLib.xcodeproj */,
 				6496BA79156A98A9004D68F5 /* libsqlite3.0.dylib */,
 				6496BA6D156A95BF004D68F5 /* www */,
@@ -438,28 +425,12 @@
 			mainGroup = 6496B9DB156A943A004D68F5;
 			productRefGroup = 6496B9EA156A943A004D68F5 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 1838D6A0169DB8AD0038C78B /* Products */;
-					ProjectRef = 18E772C216774224006F282A /* CordovaLib.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				6496B9E8156A943A004D68F5 /* Toura-iPad */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		1838D6A4169DB8AD0038C78B /* libCordova.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libCordova.a;
-			remoteRef = 1838D6A3169DB8AD0038C78B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6496B9E4156A943A004D68F5 /* Resources */ = {
@@ -481,6 +452,7 @@
 				6496BA6E156A95BF004D68F5 /* www in Resources */,
 				6496BA71156A96B5004D68F5 /* Default-Landscape.png in Resources */,
 				6496BA72156A96B5004D68F5 /* Default-Portrait.png in Resources */,
+				18E772D9167742CD006F282A /* VERSION in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
