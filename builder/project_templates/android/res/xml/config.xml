@@ -55,6 +55,7 @@
     <plugin name="GoogleAnalyticsTracker" value="com.phonegap.plugins.analytics.GoogleAnalyticsTracker" />
     <plugin name="VideoPlayer" value="com.phonegap.plugins.video.VideoPlayer"/>
     <plugin name="AdMob" value="com.phonegap.plugins.adMob.AdMobController"/>
+    <plugin name="Echo" value="org.apache.cordova.Echo" />
 </plugins>
 </cordova>
 

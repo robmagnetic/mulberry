@@ -16,8 +16,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.phonegap.api.Plugin;
-import com.phonegap.api.PluginResult;
+import org.apache.cordova.api.Plugin;
+import org.apache.cordova.api.PluginResult;
 
 import com.facebook.android.Facebook;
 import com.facebook.android.AsyncFacebookRunner;
